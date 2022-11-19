@@ -1,0 +1,37 @@
+.custom-card{
+    height: 150px !important;
+    overflow-y: auto;
+}
+
+.custom-btn{
+    text-align: right !important;
+}
+
+.custom-main-card{
+    position: relative;
+    max-height: 100vh;
+}
+
+.custom-modal{
+    position:fixed;
+    width: 700px;
+    margin: 0 auto;  
+    margin-left: 20%;
+    margin-top: 10%;    
+    z-index: 1000;
+    
+}
+
+.custom-link{
+    text-decoration: none;
+}
+
+.custom-modal-header{
+    background-color:darkblue;
+    color: white;
+}
+
+.custom-footer{
+    display: flex;
+    justify-content:space-between
+}

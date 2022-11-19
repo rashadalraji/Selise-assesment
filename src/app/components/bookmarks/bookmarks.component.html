@@ -1,0 +1,143 @@
+<div class="container p-4">
+
+    <!-- Modal -->
+    <div class="container custom-modal" *ngIf="showCustomModal">
+        <div class="card">
+            <div class="alert alert-danger mt-1 mb-1" *ngIf="isError">
+                <strong>Error!</strong> Validation failed Can not save data.
+              </div>
+            <div class="card-header custom-modal-header">
+                <div class="row">
+                    <div class="col-md-11">
+                        Add Bookmark
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-danger btn-sm" (click)="onClickClose()">X</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+                    <div class="row mb-2">
+                        <label class="col-md-3">
+                            Title:
+
+                        </label>
+                        <div class="col-md-9">
+                            <input class="form-control" formControlName="title" placeholder="Title">
+                        </div>
+
+                    </div>
+                    <div class="row mb-2">
+                        <label class="col-md-3">
+                            Url:
+
+                        </label>
+                        <div class="col-md-9">
+                            <input class="form-control" formControlName="url" placeholder="Url">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="col-md-3">
+                            Category:
+
+                        </label>
+                        <div class="col-md-8">
+                            <select class="form-control" formControlName="category" placeholder="Category">
+                                <option value="">Select Category</option>
+                                <option *ngFor="let category of categoryList" [ngValue]="category.categoryId">
+                                    {{category.categoryName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-primary btn-sm" (click)="onClickAddCategory()">
+                                +
+                            </button>
+                        </div>
+                        <!-- <input class="form-control" formControlName="message" placeholder="Your message"> -->
+                    </div>
+
+                    <div class="row mb-2" *ngIf="isPlusButtonClicked">
+                        <label class="col-md-3">
+                            New Category:
+
+                        </label>
+                        <div class="col-md-9">
+                            <input class="form-control" formControlName="new_category" placeholder="Add New Category">
+                        </div>
+                    </div>
+
+                    <div class="card-footer mt-2 custom-footer">
+                        <button type="button" class="btn btn-warning btn-sm" (click)="onClickClose()">Cancel</button>
+                        <button type="submit" class="btn btn-success btn-sm">Save</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- container -->
+    <div class="card custom-main-card">
+        <div class="alert alert-success mt-1 mb-1" *ngIf="isSaved">
+            <strong>Success!</strong> Bookmark Added successfully.
+          </div>
+        
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-10">
+                    <h4>Book Mark Manager</h4>
+                </div>
+                <div class="col-md-2 text-right">
+                    <button class="btn btn-primary btn-sm" (click)="onClickAddBookMark()">
+                        Add Bookmark
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <div class="row custom-main-card">
+            <div class="col-md-8">
+                <div class="card m-2" *ngFor="let category of categoryList">
+                    <div class="card-header">
+                        <h6>{{category?.categoryName}}</h6>
+                    </div>
+                    <div class="card-body custom-card">
+                        <div class="row">
+                            <div class="col-md-8" *ngFor="let dtlCategory of category.categoryDetails">
+                                <div class="row mb-1">
+                                    <div class="col-md-10">
+                                       <a class="custom-link" routerLink (click)="onClickTitle(dtlCategory)">{{dtlCategory?.title}}</a> 
+                                    </div>
+                                    <div class="col-md-2 custom-btn">
+                                        <div class="btn btn-info btn-sm"
+                                            (click)="onClickDetails(dtlCategory,category.categoryName)">
+                                            Details</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card m-2">
+                    <div class="card-body">
+                        <ul>
+                            <li>Title : {{categoryDtl?.title}}</li>
+                            <li>URL : {{categoryDtl?.url}}</li>
+                            <li>Category : {{categoryDtl.category}}</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
